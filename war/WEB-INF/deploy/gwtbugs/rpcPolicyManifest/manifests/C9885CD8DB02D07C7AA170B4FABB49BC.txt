@@ -1,0 +1,2 @@
+serviceClass: com.gwtbugs.client.GreetingService
+path: A3323FDAA2C620AFECB3E900C63F76BE.gwt.rpc
