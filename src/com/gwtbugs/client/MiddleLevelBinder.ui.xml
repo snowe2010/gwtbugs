@@ -4,12 +4,14 @@
   xmlns:b="urn:import:org.gwtbootstrap3.client.ui"
   xmlns:select='urn:import:org.gwtbootstrap3.extras.select.client.ui'>
   
+  <ui:with field="size" type="java.lang.String" />
   <ui:with field="labelText" type="java.lang.String" />
+  <ui:with field="liveSearch" type="java.lang.Boolean" />
   <g:HTMLPanel>
-    <b:Column size="MD_10">
+    <b:Column size="{size}">
       <b:InputGroup ui:field="inputGroup">
         <b:InputGroupAddon ui:field="label"><ui:text from="{labelText}"/></b:InputGroupAddon>
-        <select:Select ui:field="selectList"></select:Select>
+        <select:Select ui:field="selectList" liveSearch="{liveSearch}"></select:Select>
       </b:InputGroup>
     </b:Column>
   </g:HTMLPanel>
