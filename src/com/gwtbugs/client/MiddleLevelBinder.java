@@ -30,25 +30,21 @@ import com.gwtbugs.client.utilities.ElementCompositeContants;
 import com.gwtbugs.client.utilities.KeyValue;
 import com.gwtbugs.client.utilities.Utils;
 
-public class MiddleLevelBinder extends Composite implements ElementCompositeContants, HISComposite, IsWidget, HasWidgets, HasChangeHandlers {
+public class MiddleLevelBinder extends Composite implements ElementCompositeContants, HISComposite, IsWidget,
+    HasWidgets, HasChangeHandlers {
 
   private static HISListCompositeUiBinder listBinder = GWT.create(HISListCompositeUiBinder.class);
 
   interface HISListCompositeUiBinder extends UiBinder<Widget, MiddleLevelBinder> {
   }
 
-  @UiField(provided = true)
-  String labelText;
-  @UiField(provided = true)
-  String size;
-  @UiField(provided = true)
-  Boolean liveSearch;
+  @UiField(provided = true) String labelText;
+  @UiField(provided = true) String size;
+  @UiField(provided = true) Boolean liveSearch;
 
-  @UiField
-  InputGroup inputGroup;
-  @UiField
-  InputGroupAddon label;
-  @UiField Select selectList;
+  @UiField InputGroup inputGroup;
+  @UiField InputGroupAddon label;
+  @UiField MiddleLevelSelect selectList;
   private String name;
   private String dalmap;
   private int pelPosition;
@@ -66,7 +62,7 @@ public class MiddleLevelBinder extends Composite implements ElementCompositeCont
 
     this.labelText = label;
     optionList = new ArrayList<>();
-    
+
     System.out.println(labelText);
 
     initWidget(listBinder.createAndBindUi(this));
@@ -98,7 +94,7 @@ public class MiddleLevelBinder extends Composite implements ElementCompositeCont
       Scheduler.get().scheduleDeferred(new Command() {
         @Override
         public void execute() {
-            selectList.setValue(value.toString());
+          selectList.setValue(value.toString());
         }
       });
   }
@@ -138,7 +134,7 @@ public class MiddleLevelBinder extends Composite implements ElementCompositeCont
     this.domain = domain.toUpperCase();
   }
 
-  public Select getListElement() {
+  public MiddleLevelSelect getListElement() {
     return selectList;
   }
 
@@ -175,7 +171,7 @@ public class MiddleLevelBinder extends Composite implements ElementCompositeCont
 
       Option blankDefaultOption = Utils.createDefaultHiddenOption();
       tempOptionList.add(blankDefaultOption);
-      
+
       for (KeyValue kv : keyValues) {
         Option opt = new Option();
         opt.setText(kv.value);
@@ -184,13 +180,14 @@ public class MiddleLevelBinder extends Composite implements ElementCompositeCont
       }
 
       final Option oldSelectedOption = getSelectedOption();
-      
+
       System.out.println(tempOptionList);
       System.out.println(optionList);
-      
-      // if the lists aren't we need to remove all the old values 
+
+      // if the lists aren't we need to remove all the old values
       // from the dropdown and then add all the new values
       selectList.add(blankDefaultOption);
+      optionList.add(blankDefaultOption);
       if (!tempOptionList.equals(optionList)) {
         System.out.println("not equals");
         for (Option option : optionList) {
@@ -201,25 +198,25 @@ public class MiddleLevelBinder extends Composite implements ElementCompositeCont
           optionList.add(option);
         }
       }
-      
+
       for (int i = 0; i < selectList.getItemCount(); i++) {
         System.out.println(selectList.getValue(i));
       }
-      
+
       System.out.println("Old value: " + oldSelectedOption);
-      
+
       Scheduler.get().scheduleDeferred(new Command() {
         @Override
         public void execute() {
-            selectList.setValue(oldSelectedOption);
+          selectList.setValue(oldSelectedOption);
         }
       });
-//      selectList.setValue(oldSelectedOption);
+      // selectList.setValue(oldSelectedOption);
       selectList.refresh();
     }
     System.out.println("---------------End Option Set---------------");
     System.out.println();
-    
+
   }
 
   @Override

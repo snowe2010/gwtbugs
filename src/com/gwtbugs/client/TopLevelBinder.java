@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.gwtbootstrap3.extras.select.client.ui.Option;
+import org.gwtbootstrap3.extras.select.client.ui.Select;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.dom.client.ChangeEvent;
@@ -103,11 +104,11 @@ public class TopLevelBinder extends Composite implements HasWidgets {
     String type;
     String providerid = null;
     String payerid = null;
-    MiddleLevelBinder currentSelectBox = null;
+    MiddleLevelSelect currentSelectBox = null;
 
     @Override
     public void onChange(ChangeEvent event) {
-      currentSelectBox = (MiddleLevelBinder) event.getSource();
+      currentSelectBox = (MiddleLevelSelect) event.getSource();
       type = currentSelectBox.getDomain();
       System.out.println(type);
       System.out.println(currentSelectBox);
@@ -122,7 +123,7 @@ public class TopLevelBinder extends Composite implements HasWidgets {
         System.out.println(providerid);
         System.out.println("this is the provider?");
       } else if (type.equals("PAYER")) {
-        payerid = currentSelectBox.getListElement().getAllSelectedValues().get(0);
+        payerid = currentSelectBox.getAllSelectedValues().get(0);
       }
 //      dropDownServlet.getAllDropDownData(domains, providerid, null, null, payerid, null);
       System.out.println("here??");
